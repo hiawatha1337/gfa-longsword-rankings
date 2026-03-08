@@ -251,8 +251,8 @@ const athletes = [
   { name: "Charlie",   level: 1, earned: [], achievements: [] },
   { name: "Delta",   level: 1, earned: [], achievements: []},
   { name: "Echo",   level: 1, earned: [], achievements: []},
-  { name: "Foxtrot",   level: 1, earned: [], achievements: [] },  
-  { name: "Golf",   level: 1, earned: [], achievements: [] },  
+  { name: "Foxtrot",   level: 1, earned: [], achievements: [] },
+  { name: "Golf",   level: 1, earned: [], achievements: [] },
   { name: "Hotel",   level: 1, earned: [], achievements: [] },
   { name: "India",  level: 1, earned: [], achievements: [] },
   { name: "Juliet",  level: 1, earned: [], achievements: [] },
@@ -306,13 +306,13 @@ const levelsData = {
   en: [
     { level: 1, title: "Beginner", competitive: false, stars: [
       { name: "Solo Drill", type: "drill", description: "Level 1 drill performed with flow and correctness", details: [] },
-      { name: "Technique Fundamentals", type: "observation", description: "Discrete passive observation of four basics", details: ["Hand moves before foot when striking", "Correct hand extension on strikes", "Defenses 3 and 4", "Maintaining threat after completing an action"] },
-      { name: "Time Invested", type: "time", description: "3 months of training", details: [] },      
+      { name: "Technique Fundamentals", type: "observation", description: "Discrete passive observation of four basics", details: ["Hand moves before foot when striking", "Correct hand extension on strikes", "Correct posture", "Bent legs — maintaining low, stable stance"] },
+      { name: "Time Invested", type: "time", description: "3 months of training", details: [] },
     ]},
     { level: 2, title: "Novice", competitive: false, stars: [
       { name: "Solo Drill", type: "drill", description: "Level 2 drill — increased difficulty", details: [] },
       { name: "Parry-Riposte Play", type: "observation", description: "Demonstrated quality in parry-riposte exchanges", details: [] },
-      { name: "TBD", type: "pending", description: "Third requirement to be defined", details: [] },
+      { name: "Basic Tactical Actions", type: "observation", description: "Executes fundamental tactical elements in pairs work", details: ["Able to execute a clean attack", "Able to execute a correct defense", "Able to execute a riposte after defense", "Preserves threat after completing an action", "Basic distance control — maintains and adjusts measure"] },
     ]},
     { level: 3, title: "Intermediate", competitive: true, stars: [
       { name: "Solo Drill", type: "drill", description: "Level 3 drill — further progression", details: [] },
@@ -339,13 +339,13 @@ const levelsData = {
   ru: [
     { level: 1, title: "Новичок", competitive: false, stars: [
       { name: "Сольная связка", type: "drill", description: "Связка 1-го уровня — плавное и правильное выполнение", details: [] },
-      { name: "Основы техники", type: "observation", description: "Скрытая оценка тренером четырёх базовых навыков", details: ["Рука движется раньше ноги при ударе", "Правильное выпрямление руки при ударе", "Защиты 3 и 4", "Сохранение угрозы после завершения действия"] },
-      { name: "Стаж", type: "time", description: "3 месяца тренировок", details: [] },      
+      { name: "Основы техники", type: "observation", description: "Скрытая оценка тренером четырёх базовых навыков", details: ["Рука движется раньше ноги при ударе", "Правильное выпрямление руки при ударе", "Правильная осанка", "Согнутые ноги — устойчивая низкая стойка"] },
+      { name: "Стаж", type: "time", description: "3 месяца тренировок", details: [] },
     ]},
     { level: 2, title: "Ученик", competitive: false, stars: [
       { name: "Сольная связка", type: "drill", description: "Связка 2-го уровня — повышенная сложность", details: [] },
       { name: "Парад-рипост", type: "observation", description: "Качественная работа в парад-рипосте", details: [] },
-      { name: "Не определено", type: "pending", description: "Третье требование будет определено позже", details: [] },
+      { name: "Базовые тактические действия", type: "observation", description: "Выполнение основных тактических элементов в работе в парах", details: ["Выполнение чистой атаки", "Выполнение корректной защиты", "Выполнение рипоста после защиты", "Сохранение угрозы после завершения действия", "Базовый контроль дистанции — удержание и регулировка меры"] },
     ]},
     { level: 3, title: "Средний", competitive: true, stars: [
       { name: "Сольная связка", type: "drill", description: "Связка 3-го уровня — дальнейшее усложнение", details: [] },
