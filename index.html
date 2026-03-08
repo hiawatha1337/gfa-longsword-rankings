@@ -178,6 +178,47 @@
     cursor: pointer; margin-bottom: 16px; transition: all 0.2s ease;
   }
   .back-btn:hover { color: #ccc; border-color: #383838; }
+
+  /* Achievements */
+  .achievements-row {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;
+  }
+  .achievement-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 6px;
+    padding: 3px 8px; cursor: pointer; transition: all 0.2s ease;
+    font-size: 11px; font-family: 'DM Sans', sans-serif;
+  }
+  .achievement-badge:hover { border-color: #444; background: #222; }
+  .achievement-badge-emoji { font-size: 13px; }
+  .achievement-badge-name { color: #aaa; font-weight: 500; font-size: 10px; }
+  .achievement-popup {
+    margin-top: 8px; padding: 10px 12px;
+    background: #1a1a1a; border: 1px solid #333; border-radius: 8px;
+    animation: popupFade 0.15s ease;
+  }
+  .achievement-popup-header {
+    display: flex; align-items: center; gap: 6px; margin-bottom: 4px;
+  }
+  .achievement-popup-emoji { font-size: 16px; }
+  .achievement-popup-name {
+    font-size: 13px; font-weight: 600; color: #e0e0e0; font-family: 'DM Sans', sans-serif;
+  }
+  .achievement-popup-desc {
+    font-size: 11px; color: #999; line-height: 1.5; font-family: 'DM Sans', sans-serif;
+    padding-left: 22px;
+  }
+  @keyframes popupFade {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .achievements-section {
+    margin-top: 12px; padding-top: 12px; border-top: 1px solid #252525;
+  }
+  .achievements-section-label {
+    font-size: 10px; font-weight: 600; color: #555; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 8px; font-family: 'DM Sans', sans-serif;
+  }
 </style>
 </head>
 <body>
@@ -189,36 +230,41 @@
  *  ATHLETE DATA — EDIT HERE
  * ============================================================
  *  Each athlete has:
- *    name     — display name / codename
- *    level    — current level (1–5)
- *    earned   — array of star indices earned at current level
- *               [0] = first star, [1] = second, [2] = third
- *               e.g. [0, 2] means first and third stars earned
+ *    name         — display name / codename
+ *    level        — current level (1–5)
+ *    earned       — array of star indices earned at current level
+ *                   [0] = first star, [1] = second, [2] = third
+ *    achievements — (optional) array of { emoji, name, description }
  *
  *  Examples:
- *    { name: "Wolf",    level: 1, earned: [0, 1] }
- *    → Level 1, earned stars 1 and 2, missing star 3
+ *    { name: "Wolf", level: 1, earned: [0, 1], achievements: [
+ *        { emoji: "📜", name: "Legacy Test", description: "Completed the original 13-point technical test" }
+ *    ]}
  *
- *    { name: "Raven",   level: 2, earned: [0] }
- *    → Level 2 (completed level 1), earned star 1 at level 2
- *
- *    { name: "Hawk",    level: 1, earned: [] }
- *    → Brand new, no stars yet
+ *    { name: "Hawk", level: 1, earned: [], achievements: [] }
+ *    → Brand new, no stars or achievements
  * ============================================================
  */
 const athletes = [
-  { name: "Athlete 1",   level: 1, earned: [0, 1] },
-  { name: "Athlete 2",   level: 2, earned: [0] },
-  { name: "Athlete 3",   level: 1, earned: [] },
-  { name: "Athlete 4",   level: 1, earned: [0, 1, 2] },
-  { name: "Athlete 5",   level: 3, earned: [1] },
-  { name: "Athlete 6",   level: 1, earned: [0] },
-  { name: "Athlete 7",   level: 2, earned: [0, 1] },
-  { name: "Athlete 8",   level: 1, earned: [0] },
-  { name: "Athlete 9",   level: 1, earned: [] },
-  { name: "Athlete 10",  level: 1, earned: [0, 1] },
-  { name: "Athlete 11",  level: 2, earned: [] },
-  { name: "Athlete 12",  level: 1, earned: [0] },
+  { name: "Athlete 1",   level: 1, earned: [0, 1], achievements: [] },
+  { name: "Athlete 2",   level: 2, earned: [0], achievements: [
+    { emoji: "📜", name: "Legacy Test", nameRu: "Экзамен (Legacy)", description: "Completed the original 13-point technical test before it was retired", descriptionRu: "Сдал оригинальный технический тест из 13 пунктов до его отмены" },
+  ]},
+  { name: "Athlete 3",   level: 1, earned: [], achievements: [] },
+  { name: "Athlete 4",   level: 1, earned: [0, 1, 2], achievements: [
+    { emoji: "⚔️", name: "First Tournament", nameRu: "Первый турнир", description: "Participated in their first HEMA tournament", descriptionRu: "Принял участие в первом турнире по HEMA" },
+  ]},
+  { name: "Athlete 5",   level: 3, earned: [1], achievements: [
+    { emoji: "📜", name: "Legacy Test", nameRu: "Экзамен (Legacy)", description: "Completed the original 13-point technical test before it was retired", descriptionRu: "Сдал оригинальный технический тест из 13 пунктов до его отмены" },
+    { emoji: "🏆", name: "Tournament Win", nameRu: "Победа на турнире", description: "Won a placement at an official HEMA tournament", descriptionRu: "Занял призовое место на официальном турнире по HEMA" },
+  ]},
+  { name: "Athlete 6",   level: 1, earned: [0], achievements: [] },
+  { name: "Athlete 7",   level: 2, earned: [0, 1], achievements: [] },
+  { name: "Athlete 8",   level: 1, earned: [0], achievements: [] },
+  { name: "Athlete 9",   level: 1, earned: [], achievements: [] },
+  { name: "Athlete 10",  level: 1, earned: [0, 1], achievements: [] },
+  { name: "Athlete 11",  level: 2, earned: [], achievements: [] },
+  { name: "Athlete 12",  level: 1, earned: [0], achievements: [] },
 ];
 
 
@@ -241,6 +287,7 @@ const translations = {
     level: "Level",
     back: "Back",
     starsProgress: "stars",
+    achievements: "Achievements",
   },
   ru: {
     title: "Система ранжирования",
@@ -258,6 +305,7 @@ const translations = {
     level: "Уровень",
     back: "Назад",
     starsProgress: "звёзд",
+    achievements: "Достижения",
   },
 };
 
@@ -333,6 +381,7 @@ let selectedAthlete = null;
 let expandedLevels = {};
 let expandedStars = {};
 let expandedAthleteCards = {};
+let openAchievement = null; // "athleteIdx-achievementIdx" or null
 
 function resetExpanded() { expandedLevels = {}; expandedStars = {}; }
 
@@ -421,6 +470,8 @@ function renderAthleteCard(athlete, idx, t, levels) {
   const currentLevelData = levels[athlete.level - 1];
   const initial = athlete.name.charAt(0).toUpperCase();
   const expanded = !!expandedAthleteCards[idx];
+  const achievements = athlete.achievements || [];
+  const isRu = currentLang === "ru";
 
   let html = `<div class="athlete-card${expanded ? " expanded" : ""}" onclick="toggleAthleteCard(${idx})">`;
 
@@ -430,6 +481,14 @@ function renderAthleteCard(athlete, idx, t, levels) {
   html += `<div class="athlete-card-info">`;
   html += `<div class="athlete-card-name">${athlete.name}</div>`;
   html += `<div class="athlete-card-level">${t.level} ${athlete.level} · ${currentLevelData.title}</div>`;
+  // Achievement badges inline on collapsed card
+  if (achievements.length > 0 && !expanded) {
+    html += `<div class="achievements-row" style="margin-top:4px;">`;
+    achievements.forEach(a => {
+      html += `<span class="achievement-badge" style="pointer-events:none;"><span class="achievement-badge-emoji">${a.emoji}</span></span>`;
+    });
+    html += `</div>`;
+  }
   html += `</div>`;
   html += `<div class="athlete-card-right">`;
   html += `<div class="athlete-card-stars">`;
@@ -480,6 +539,35 @@ function renderAthleteCard(athlete, idx, t, levels) {
         html += `</div>`;
       }
     });
+
+    // Achievements section
+    if (achievements.length > 0) {
+      html += `<div class="achievements-section">`;
+      html += `<div class="achievements-section-label">${t.achievements}</div>`;
+      html += `<div class="achievements-row">`;
+      achievements.forEach((a, ai) => {
+        const aName = isRu && a.nameRu ? a.nameRu : a.name;
+        html += `<span class="achievement-badge" onclick="event.stopPropagation();toggleAchievement(${idx},${ai})"><span class="achievement-badge-emoji">${a.emoji}</span><span class="achievement-badge-name">${aName}</span></span>`;
+      });
+      html += `</div>`;
+
+      // Popup for selected achievement
+      if (openAchievement && openAchievement.startsWith(idx + "-")) {
+        const ai = parseInt(openAchievement.split("-")[1]);
+        const a = achievements[ai];
+        if (a) {
+          const aName = isRu && a.nameRu ? a.nameRu : a.name;
+          const aDesc = isRu && a.descriptionRu ? a.descriptionRu : a.description;
+          html += `<div class="achievement-popup">`;
+          html += `<div class="achievement-popup-header"><span class="achievement-popup-emoji">${a.emoji}</span><span class="achievement-popup-name">${aName}</span></div>`;
+          html += `<div class="achievement-popup-desc">${aDesc}</div>`;
+          html += `</div>`;
+        }
+      }
+
+      html += `</div>`;
+    }
+
     html += `</div>`;
   }
 
@@ -522,10 +610,15 @@ function render() {
 }
 
 function switchLang(lang) { currentLang = lang; render(); }
-function switchTab(tab) { currentTab = tab; resetExpanded(); expandedAthleteCards = {}; render(); }
+function switchTab(tab) { currentTab = tab; resetExpanded(); expandedAthleteCards = {}; openAchievement = null; render(); }
 function toggleLevel(i) { expandedLevels[i] = !expandedLevels[i]; render(); }
 function toggleStar(key) { expandedStars[key] = !expandedStars[key]; render(); }
-function toggleAthleteCard(idx) { expandedAthleteCards[idx] = !expandedAthleteCards[idx]; render(); }
+function toggleAthleteCard(idx) { expandedAthleteCards[idx] = !expandedAthleteCards[idx]; openAchievement = null; render(); }
+function toggleAchievement(athleteIdx, achIdx) {
+  const key = athleteIdx + "-" + achIdx;
+  openAchievement = (openAchievement === key) ? null : key;
+  render();
+}
 
 render();
 </script>
