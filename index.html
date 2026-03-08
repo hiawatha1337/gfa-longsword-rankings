@@ -434,7 +434,7 @@ function renderAthleteCard(athlete, idx, t, levels) {
   html += `<div class="athlete-card-right">`;
   html += `<div class="athlete-card-stars">`;
   for (let s = 0; s < 3; s++) {
-    html += starSVG(14, athlete.earned.includes(s));
+    html += starSVG(14, s < athlete.earned.length);
   }
   html += `</div>`;
   html += `<span class="athlete-card-arrow">${expanded ? "▾" : "▸"}</span>`;
@@ -459,7 +459,7 @@ function renderAthleteCard(athlete, idx, t, levels) {
       for (let s = 0; s < 3; s++) {
         let earned = false;
         if (isCompleted) earned = true;
-        else if (isCurrent) earned = athlete.earned.includes(s);
+        else if (isCurrent) earned = s < athlete.earned.length;
         html += starSVG(12, earned);
       }
       html += `</div></div>`;
