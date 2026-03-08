@@ -39,15 +39,13 @@
 
   /* Main Tabs */
   .main-tabs {
-    display: flex; gap: 0; margin-bottom: 24px; overflow-x: auto;
+    display: flex; gap: 0; margin-bottom: 24px;
     border-bottom: 1px solid #252525; padding-bottom: 0;
-    scrollbar-width: none; -ms-overflow-style: none;
   }
-  .main-tabs::-webkit-scrollbar { display: none; }
   .main-tab {
-    padding: 8px 16px; border: none; cursor: pointer;
-    background: transparent; color: #555; font-size: 12px; font-weight: 600;
-    font-family: 'DM Sans', sans-serif; white-space: nowrap;
+    flex: 1; padding: 10px 16px; border: none; cursor: pointer;
+    background: transparent; color: #555; font-size: 13px; font-weight: 600;
+    font-family: 'DM Sans', sans-serif; text-align: center;
     border-bottom: 2px solid transparent; transition: all 0.2s ease;
     margin-bottom: -1px;
   }
@@ -68,21 +66,15 @@
     justify-content: center; flex-shrink: 0;
   }
   .level-circle.first { background: linear-gradient(135deg, #e2b340, #c99a2e); border: none; }
-  .level-circle.completed { background: linear-gradient(135deg, #2d5a2d, #1a3a1a); border: 1px solid #3d7a3d; }
-  .level-circle.current { background: linear-gradient(135deg, #e2b340, #c99a2e); border: none; }
   .level-num { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 800; color: #777; }
-  .level-circle.first .level-num, .level-circle.current .level-num { color: #0f0f0f; }
-  .level-circle.completed .level-num { color: #7bc47b; }
+  .level-circle.first .level-num { color: #0f0f0f; }
   .level-title-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .level-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: #e0e0e0; }
-  .start-badge, .current-badge, .completed-badge {
-    font-size: 8px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.08em; padding: 2px 7px; border-radius: 4px;
-    font-family: 'DM Sans', sans-serif;
+  .start-badge {
+    font-size: 8px; font-weight: 700; color: #e2b340; text-transform: uppercase;
+    letter-spacing: 0.08em; background: rgba(226, 179, 64, 0.08);
+    padding: 2px 7px; border-radius: 4px; font-family: 'DM Sans', sans-serif;
   }
-  .start-badge { color: #e2b340; background: rgba(226, 179, 64, 0.08); }
-  .current-badge { color: #e2b340; background: rgba(226, 179, 64, 0.15); }
-  .completed-badge { color: #7bc47b; background: rgba(123, 196, 123, 0.1); }
   .collapsed-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
   .collapsed-tag { font-size: 9px; padding: 1px 7px; border-radius: 3px; font-family: 'DM Sans', sans-serif; }
   .level-right { display: flex; align-items: center; gap: 8px; }
@@ -98,7 +90,6 @@
   .stars-container { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
   .star-req { border-radius: 8px; padding: 10px 12px; position: relative; }
   .star-req.clickable { cursor: pointer; }
-  .star-req.earned { box-shadow: inset 0 0 0 1px rgba(226, 179, 64, 0.3); }
   .star-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
   .star-info { flex: 1; }
   .star-name-row { display: flex; align-items: center; gap: 7px; margin-bottom: 2px; }
@@ -109,9 +100,6 @@
   .star-detail { display: flex; align-items: baseline; gap: 7px; margin-bottom: 3px; }
   .star-detail-dot { font-size: 8px; flex-shrink: 0; }
   .star-detail-text { color: #aaa; font-size: 11px; font-family: 'DM Sans', sans-serif; line-height: 1.4; }
-  .earned-check {
-    font-size: 10px; color: #e2b340; font-weight: 700; margin-left: auto; flex-shrink: 0;
-  }
 
   /* Gate */
   .gate { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 0; position: relative; }
@@ -130,24 +118,66 @@
   .note p { color: #999; font-size: 11px; line-height: 1.6; }
   .note-label { color: #e2b340; font-weight: 600; }
 
-  /* Athlete Summary in personal tab */
-  .athlete-summary {
-    background: #161616; border: 1px solid #282828; border-radius: 10px;
-    padding: 16px; margin-bottom: 24px; display: flex; align-items: center; gap: 14px;
+  /* Athlete Cards Grid */
+  .athletes-grid { display: flex; flex-direction: column; gap: 10px; }
+  .athlete-card {
+    background: #161616; border: 1px solid #252525; border-radius: 12px;
+    padding: 16px; cursor: pointer; transition: all 0.2s ease;
   }
+  .athlete-card:hover { border-color: #333; }
+  .athlete-card.expanded { border-color: #383838; }
+  .athlete-card-header { display: flex; align-items: center; gap: 14px; }
   .athlete-avatar {
-    width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #2a2a2a, #1e1e1e);
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, #2a2a2a, #1e1e1e);
     border: 1px solid #383838; display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 800; color: #888;
+    font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 800; color: #777;
+    flex-shrink: 0;
   }
-  .athlete-meta { flex: 1; }
-  .athlete-name-display {
-    font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: #e0e0e0;
+  .athlete-card-info { flex: 1; min-width: 0; }
+  .athlete-card-name {
+    font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: #e0e0e0;
   }
-  .athlete-level-label { font-size: 11px; color: #888; margin-top: 2px; }
-  .athlete-stars-summary { display: flex; gap: 3px; margin-top: 6px; }
-  .mini-star-earned { color: #e2b340; font-size: 10px; }
-  .mini-star-empty { color: #333; font-size: 10px; }
+  .athlete-card-level { font-size: 11px; color: #888; margin-top: 1px; }
+  .athlete-card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+  .athlete-card-stars { display: flex; gap: 3px; }
+  .athlete-card-arrow { color: #444; font-size: 11px; }
+
+  /* Athlete expanded detail */
+  .athlete-detail { margin-top: 16px; padding-top: 16px; border-top: 1px solid #252525; }
+  .athlete-level-row {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+  }
+  .athlete-level-circle {
+    width: 28px; height: 28px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0;
+    font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 800;
+  }
+  .athlete-level-circle.completed-sm { background: #1a3a1a; border: 1px solid #2d5a2d; color: #7bc47b; }
+  .athlete-level-circle.current-sm { background: linear-gradient(135deg, #e2b340, #c99a2e); border: none; color: #0f0f0f; }
+  .athlete-level-circle.future-sm { background: #1a1a1a; border: 1px solid #2a2a2a; color: #444; }
+  .athlete-level-name { font-size: 13px; font-weight: 600; color: #ccc; flex: 1; }
+  .athlete-level-name.future { color: #444; }
+  .athlete-level-stars { display: flex; gap: 2px; }
+  .athlete-star-item {
+    display: flex; align-items: center; gap: 5px; padding: 4px 0;
+  }
+  .athlete-star-label { font-size: 11px; color: #888; font-family: 'DM Sans', sans-serif; }
+  .athlete-star-label.earned-label { color: #ccc; }
+  .athlete-star-check { color: #e2b340; font-size: 10px; }
+  .athlete-star-missing { color: #333; font-size: 10px; }
+  .athlete-stars-detail {
+    margin-left: 38px; margin-bottom: 8px; display: flex; flex-direction: column; gap: 3px;
+  }
+
+  /* Back button */
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+    background: #1a1a1a; border: 1px solid #252525; border-radius: 8px;
+    color: #888; font-size: 12px; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; margin-bottom: 16px; transition: all 0.2s ease;
+  }
+  .back-btn:hover { color: #ccc; border-color: #383838; }
 </style>
 </head>
 <body>
@@ -159,29 +189,36 @@
  *  ATHLETE DATA — EDIT HERE
  * ============================================================
  *  Each athlete has:
- *    name     — display name
+ *    name     — display name / codename
  *    level    — current level (1–5)
  *    earned   — array of star indices earned at current level
  *               [0] = first star, [1] = second, [2] = third
  *               e.g. [0, 2] means first and third stars earned
  *
  *  Examples:
- *    { name: "Алексей", level: 1, earned: [0, 1] }
- *    → Level 1 athlete, earned stars 1 and 2, missing star 3
+ *    { name: "Wolf",    level: 1, earned: [0, 1] }
+ *    → Level 1, earned stars 1 and 2, missing star 3
  *
- *    { name: "Мария", level: 2, earned: [0] }
- *    → Level 2 athlete (completed all of level 1), earned star 1 at level 2
+ *    { name: "Raven",   level: 2, earned: [0] }
+ *    → Level 2 (completed level 1), earned star 1 at level 2
  *
- *    { name: "Дмитрий", level: 1, earned: [] }
+ *    { name: "Hawk",    level: 1, earned: [] }
  *    → Brand new, no stars yet
  * ============================================================
  */
 const athletes = [
-  { name: "Athlete1",  level: 1, earned: [0, 1] },
-  { name: "Athlete2",    level: 2, earned: [0] },
-  { name: "Athlete3",  level: 1, earned: [] },
-  { name: "Athlete4",    level: 1, earned: [0, 1, 2] },
-  { name: "Athlete5",    level: 3, earned: [1] },
+  { name: "Athlete 1",   level: 1, earned: [0, 1] },
+  { name: "Athlete 2",   level: 2, earned: [0] },
+  { name: "Athlete 3",   level: 1, earned: [] },
+  { name: "Athlete 4",   level: 1, earned: [0, 1, 2] },
+  { name: "Athlete 5",   level: 3, earned: [1] },
+  { name: "Athlete 6",   level: 1, earned: [0] },
+  { name: "Athlete 7",   level: 2, earned: [0, 1] },
+  { name: "Athlete 8",   level: 1, earned: [0] },
+  { name: "Athlete 9",   level: 1, earned: [] },
+  { name: "Athlete 10",  level: 1, earned: [0, 1] },
+  { name: "Athlete 11",  level: 2, earned: [] },
+  { name: "Athlete 12",  level: 1, earned: [0] },
 ];
 
 
@@ -198,9 +235,12 @@ const translations = {
     grandfatheringLabel: "Grandfathering:",
     grandfatheringText: "Athletes who already started the previous 13-point test may complete it for a rare achievement sticker and advancement credit.",
     overview: "Overview",
+    athletesTab: "Athletes",
     currentLevel: "Current level",
     completed: "Completed",
-    earned: "✓",
+    level: "Level",
+    back: "Back",
+    starsProgress: "stars",
   },
   ru: {
     title: "Система ранжирования",
@@ -212,9 +252,12 @@ const translations = {
     grandfatheringLabel: "Переходный период:",
     grandfatheringText: "Спортсмены, которые уже начали сдавать предыдущий тест из 13 пунктов, могут завершить его для получения редкого достижения (стикер) и зачёта продвижения.",
     overview: "Обзор",
+    athletesTab: "Спортсмены",
     currentLevel: "Текущий уровень",
     completed: "Пройден",
-    earned: "✓",
+    level: "Уровень",
+    back: "Назад",
+    starsProgress: "звёзд",
   },
 };
 
@@ -285,14 +328,13 @@ const typeColors = {
 };
 
 let currentLang = "ru";
-let currentTab = "overview"; // "overview" or athlete index as string
+let currentTab = "overview";
+let selectedAthlete = null;
 let expandedLevels = {};
 let expandedStars = {};
+let expandedAthleteCards = {};
 
-function resetExpanded() {
-  expandedLevels = {};
-  expandedStars = {};
-}
+function resetExpanded() { expandedLevels = {}; expandedStars = {}; }
 
 function starSVG(size, filled) {
   const fill = filled ? "#e2b340" : "#2a2a2a";
@@ -300,8 +342,8 @@ function starSVG(size, filled) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${fill}" stroke="${stroke}" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
 }
 
-function checkSVG() {
-  return `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#e2b340" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+function checkSVG(size) {
+  return `<svg width="${size || 12}" height="${size || 12}" viewBox="0 0 24 24" fill="none" stroke="#e2b340" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
 }
 
 function renderStarReq(star, levelIdx, starIdx, isEarned, showEarned) {
@@ -310,12 +352,12 @@ function renderStarReq(star, levelIdx, starIdx, isEarned, showEarned) {
   const starKey = `${levelIdx}-${starIdx}`;
   const starExpanded = !!expandedStars[starKey];
   const filled = star.type !== "pending";
-  const earnedClass = (showEarned && isEarned) ? " earned" : "";
+  const earnedStyle = (showEarned && isEarned) ? `box-shadow:inset 0 0 0 1px rgba(226,179,64,0.3);` : "";
 
-  let html = `<div class="star-req${hasDetails ? " clickable" : ""}${earnedClass}" style="background:${c.bg};border:1px solid ${c.border}" ${hasDetails ? `onclick="event.stopPropagation();toggleStar('${starKey}')"` : ""}>`;
+  let html = `<div class="star-req${hasDetails ? " clickable" : ""}" style="background:${c.bg};border:1px solid ${c.border};${earnedStyle}" ${hasDetails ? `onclick="event.stopPropagation();toggleStar('${starKey}')"` : ""}>`;
   html += `<div class="star-top"><div class="star-info">`;
   html += `<div class="star-name-row">${starSVG(12, filled)}<span class="star-name" style="color:${c.text}">${star.name}</span>`;
-  if (showEarned && isEarned) html += `<span class="earned-check">${checkSVG()}</span>`;
+  if (showEarned && isEarned) html += `<span style="margin-left:auto;flex-shrink:0;">${checkSVG(12)}</span>`;
   html += `</div>`;
   html += `<p class="star-desc">${star.description}</p>`;
   html += `</div>`;
@@ -333,95 +375,115 @@ function renderStarReq(star, levelIdx, starIdx, isEarned, showEarned) {
   return html;
 }
 
-function renderLevelCard(level, i, levels, t, athlete) {
+function renderOverviewLevel(level, i, levels, t) {
   const isLast = i === levels.length - 1;
   const expanded = !!expandedLevels[i];
-  const showEarned = !!athlete;
-
-  // Determine level state for athlete view
-  let circleClass = "";
-  let badge = "";
-  if (athlete) {
-    const lvl = level.level;
-    if (lvl < athlete.level) {
-      circleClass = " completed";
-      badge = `<span class="completed-badge">${t.completed}</span>`;
-    } else if (lvl === athlete.level) {
-      circleClass = " current";
-      badge = `<span class="current-badge">${t.currentLevel}</span>`;
-    }
-  } else {
-    if (i === 0) circleClass = " first";
-  }
 
   let html = `<div class="level-card ${expanded ? "expanded" : ""}" onclick="toggleLevel(${i})">`;
-  html += `<div class="level-header">`;
-  html += `<div class="level-left">`;
-  html += `<div class="level-circle${circleClass}"><span class="level-num">${level.level}</span></div>`;
-  html += `<div>`;
-  html += `<div class="level-title-row"><span class="level-title">${level.title}</span>`;
-  if (!athlete && i === 0) badge = `<span class="start-badge">${t.start}</span>`;
-  html += badge;
+  html += `<div class="level-header"><div class="level-left">`;
+  html += `<div class="level-circle${i === 0 ? " first" : ""}"><span class="level-num">${level.level}</span></div>`;
+  html += `<div><div class="level-title-row"><span class="level-title">${level.title}</span>`;
+  if (i === 0) html += `<span class="start-badge">${t.start}</span>`;
   html += `</div>`;
 
   if (!expanded) {
     html += `<div class="collapsed-tags">`;
-    level.stars.forEach((s, si) => {
+    level.stars.forEach(s => {
       const c = typeColors[s.type];
-      let earned = false;
-      if (athlete) {
-        if (level.level < athlete.level) earned = true;
-        else if (level.level === athlete.level) earned = athlete.earned.includes(si);
-      }
-      const opacity = (athlete && !earned && level.level === athlete.level) ? "opacity:0.4;" : "";
-      html += `<span class="collapsed-tag" style="color:${c.text};background:${c.bg};${opacity}">${s.name}${earned ? " ✓" : ""}</span>`;
+      html += `<span class="collapsed-tag" style="color:${c.text};background:${c.bg}">${s.name}</span>`;
     });
     html += `</div>`;
   }
-
   html += `</div></div>`;
 
   html += `<div class="level-right">`;
-  if (level.competitive) {
-    html += `<span class="comp-label yes">${t.competitive}</span>`;
-  } else {
-    html += `<span class="comp-label no">${t.nonCompetitive}</span>`;
-  }
-  html += `<span class="expand-arrow">${expanded ? "▾" : "▸"}</span>`;
-  html += `</div></div>`;
+  html += level.competitive
+    ? `<span class="comp-label yes">${t.competitive}</span>`
+    : `<span class="comp-label no">${t.nonCompetitive}</span>`;
+  html += `<span class="expand-arrow">${expanded ? "▾" : "▸"}</span></div></div>`;
 
   if (expanded) {
     html += `<div class="stars-container">`;
-    level.stars.forEach((star, si) => {
-      let isEarned = false;
-      if (athlete) {
-        if (level.level < athlete.level) isEarned = true;
-        else if (level.level === athlete.level) isEarned = athlete.earned.includes(si);
+    level.stars.forEach((star, si) => { html += renderStarReq(star, i, si, false, false); });
+    html += `</div>`;
+  }
+  html += `</div>`;
+
+  if (!isLast) {
+    html += `<div class="gate"><div class="gate-line"></div><div class="gate-pill">`;
+    html += `${starSVG(11, true)}${starSVG(11, true)}${starSVG(11, true)}`;
+    html += `<span class="gate-text">${t.advance}</span></div></div>`;
+  }
+  return html;
+}
+
+function renderAthleteCard(athlete, idx, t, levels) {
+  const currentLevelData = levels[athlete.level - 1];
+  const initial = athlete.name.charAt(0).toUpperCase();
+  const expanded = !!expandedAthleteCards[idx];
+
+  let html = `<div class="athlete-card${expanded ? " expanded" : ""}" onclick="toggleAthleteCard(${idx})">`;
+
+  // Header row
+  html += `<div class="athlete-card-header">`;
+  html += `<div class="athlete-avatar">${initial}</div>`;
+  html += `<div class="athlete-card-info">`;
+  html += `<div class="athlete-card-name">${athlete.name}</div>`;
+  html += `<div class="athlete-card-level">${t.level} ${athlete.level} · ${currentLevelData.title}</div>`;
+  html += `</div>`;
+  html += `<div class="athlete-card-right">`;
+  html += `<div class="athlete-card-stars">`;
+  for (let s = 0; s < 3; s++) {
+    html += starSVG(14, athlete.earned.includes(s));
+  }
+  html += `</div>`;
+  html += `<span class="athlete-card-arrow">${expanded ? "▾" : "▸"}</span>`;
+  html += `</div></div>`;
+
+  // Expanded: show all levels with progress
+  if (expanded) {
+    html += `<div class="athlete-detail">`;
+    levels.forEach((lvl, li) => {
+      const isCompleted = lvl.level < athlete.level;
+      const isCurrent = lvl.level === athlete.level;
+      const isFuture = lvl.level > athlete.level;
+
+      let circleClass = "future-sm";
+      if (isCompleted) circleClass = "completed-sm";
+      if (isCurrent) circleClass = "current-sm";
+
+      html += `<div class="athlete-level-row">`;
+      html += `<div class="athlete-level-circle ${circleClass}">${lvl.level}</div>`;
+      html += `<span class="athlete-level-name${isFuture ? " future" : ""}">${lvl.title}</span>`;
+      html += `<div class="athlete-level-stars">`;
+      for (let s = 0; s < 3; s++) {
+        let earned = false;
+        if (isCompleted) earned = true;
+        else if (isCurrent) earned = athlete.earned.includes(s);
+        html += starSVG(12, earned);
       }
-      html += renderStarReq(star, i, si, isEarned, showEarned);
+      html += `</div></div>`;
+
+      // Show star names for current level
+      if (isCurrent) {
+        html += `<div class="athlete-stars-detail">`;
+        lvl.stars.forEach((star, si) => {
+          const earned = athlete.earned.includes(si);
+          const c = typeColors[star.type];
+          html += `<div class="athlete-star-item">`;
+          html += earned
+            ? `<span class="athlete-star-check">${checkSVG(10)}</span>`
+            : `<span class="athlete-star-missing">○</span>`;
+          html += `<span class="athlete-star-label${earned ? " earned-label" : ""}">${star.name}</span>`;
+          html += `</div>`;
+        });
+        html += `</div>`;
+      }
     });
     html += `</div>`;
   }
 
   html += `</div>`;
-
-  // Gate
-  if (!isLast) {
-    let gateCompleted = athlete && level.level < athlete.level;
-    html += `<div class="gate"><div class="gate-line"></div><div class="gate-pill">`;
-    if (gateCompleted) {
-      html += `${starSVG(11, true)}${starSVG(11, true)}${starSVG(11, true)}`;
-    } else if (athlete && level.level === athlete.level) {
-      for (let g = 0; g < 3; g++) {
-        html += starSVG(11, athlete.earned.includes(g));
-      }
-    } else {
-      html += `${starSVG(11, !athlete)}${starSVG(11, !athlete)}${starSVG(11, !athlete)}`;
-    }
-    html += `<span class="gate-text">${t.advance}</span>`;
-    html += `</div></div>`;
-  }
-
   return html;
 }
 
@@ -443,54 +505,27 @@ function render() {
   // Main tabs
   html += `<div class="main-tabs">`;
   html += `<button class="main-tab ${currentTab === "overview" ? "active" : ""}" onclick="switchTab('overview')">${t.overview}</button>`;
-  athletes.forEach((a, i) => {
-    html += `<button class="main-tab ${currentTab === String(i) ? "active" : ""}" onclick="switchTab('${i}')">${a.name}</button>`;
-  });
+  html += `<button class="main-tab ${currentTab === "athletes" ? "active" : ""}" onclick="switchTab('athletes')">${t.athletesTab}</button>`;
   html += `</div>`;
 
   if (currentTab === "overview") {
-    // Overview: plain ranking system
-    levels.forEach((level, i) => {
-      html += renderLevelCard(level, i, levels, t, null);
-    });
-
-    // Grandfathering note
+    levels.forEach((level, i) => { html += renderOverviewLevel(level, i, levels, t); });
     html += `<div class="note"><p><span class="note-label">${t.grandfatheringLabel} </span>${t.grandfatheringText}</p></div>`;
-
   } else {
-    // Athlete personal view
-    const athlete = athletes[parseInt(currentTab)];
-    const currentLevelData = levels[athlete.level - 1];
-
-    // Summary card
-    const initial = athlete.name.charAt(0).toUpperCase();
-    const earnedCount = athlete.earned.length;
-    html += `<div class="athlete-summary">`;
-    html += `<div class="athlete-avatar">${initial}</div>`;
-    html += `<div class="athlete-meta">`;
-    html += `<div class="athlete-name-display">${athlete.name}</div>`;
-    html += `<div class="athlete-level-label">${t.currentLevel}: ${currentLevelData.title} (${athlete.level})</div>`;
-    html += `<div class="athlete-stars-summary">`;
-    for (let s = 0; s < 3; s++) {
-      html += athlete.earned.includes(s)
-        ? `<span class="mini-star-earned">${starSVG(14, true)}</span>`
-        : `<span class="mini-star-empty">${starSVG(14, false)}</span>`;
-    }
-    html += `</div></div></div>`;
-
-    // Full progression with athlete state
-    levels.forEach((level, i) => {
-      html += renderLevelCard(level, i, levels, t, athlete);
-    });
+    // Athletes list with expandable cards
+    html += `<div class="athletes-grid">`;
+    athletes.forEach((a, i) => { html += renderAthleteCard(a, i, t, levels); });
+    html += `</div>`;
   }
 
   app.innerHTML = html;
 }
 
 function switchLang(lang) { currentLang = lang; render(); }
-function switchTab(tab) { currentTab = tab; resetExpanded(); render(); }
+function switchTab(tab) { currentTab = tab; resetExpanded(); expandedAthleteCards = {}; render(); }
 function toggleLevel(i) { expandedLevels[i] = !expandedLevels[i]; render(); }
 function toggleStar(key) { expandedStars[key] = !expandedStars[key]; render(); }
+function toggleAthleteCard(idx) { expandedAthleteCards[idx] = !expandedAthleteCards[idx]; render(); }
 
 render();
 </script>
