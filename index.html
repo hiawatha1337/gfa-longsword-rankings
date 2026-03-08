@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Система ранжирования / Athlete Ranking System</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh;
+    background: #0f0f0f;
+    color: #e0e0e0;
+    font-family: 'DM Sans', sans-serif;
+    padding: 28px 16px;
+  }
+  .container { max-width: 500px; margin: 0 auto; }
+
+  /* Language Toggle */
+  .lang-toggle { display: flex; justify-content: flex-end; margin-bottom: 16px; }
+  .lang-toggle-inner {
+    display: flex; background: #1a1a1a; border-radius: 8px; padding: 3px; border: 1px solid #252525;
+  }
+  .lang-btn {
+    padding: 5px 14px; border: none; border-radius: 6px; cursor: pointer;
+    background: transparent; color: #666; font-size: 12px; font-weight: 700;
+    font-family: 'DM Sans', sans-serif; text-transform: uppercase;
+    letter-spacing: 0.06em; transition: all 0.2s ease;
+  }
+  .lang-btn.active { background: #2a2a2a; color: #e2b340; }
+
+  /* Header */
+  .header { margin-bottom: 20px; text-align: center; }
+  .header h1 {
+    font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 800;
+    color: #e8e8e8; margin-bottom: 6px; letter-spacing: -0.02em;
+  }
+  .header p { color: #666; font-size: 12px; line-height: 1.5; }
+
+  /* Main Tabs */
+  .main-tabs {
+    display: flex; gap: 0; margin-bottom: 24px; overflow-x: auto;
+    border-bottom: 1px solid #252525; padding-bottom: 0;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .main-tabs::-webkit-scrollbar { display: none; }
+  .main-tab {
+    padding: 8px 16px; border: none; cursor: pointer;
+    background: transparent; color: #555; font-size: 12px; font-weight: 600;
+    font-family: 'DM Sans', sans-serif; white-space: nowrap;
+    border-bottom: 2px solid transparent; transition: all 0.2s ease;
+    margin-bottom: -1px;
+  }
+  .main-tab.active { color: #e2b340; border-bottom-color: #e2b340; }
+  .main-tab:hover:not(.active) { color: #888; }
+
+  /* Level Card */
+  .level-card {
+    background: #161616; border: 1px solid #222; border-radius: 12px;
+    padding: 12px 18px; cursor: pointer; transition: all 0.2s ease;
+  }
+  .level-card.expanded { border-color: #333; padding: 18px; }
+  .level-header { display: flex; align-items: center; justify-content: space-between; }
+  .level-left { display: flex; align-items: center; gap: 12px; }
+  .level-circle {
+    width: 36px; height: 36px; border-radius: 50%; background: #1e1e1e;
+    border: 1px solid #333; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0;
+  }
+  .level-circle.first { background: linear-gradient(135deg, #e2b340, #c99a2e); border: none; }
+  .level-circle.completed { background: linear-gradient(135deg, #2d5a2d, #1a3a1a); border: 1px solid #3d7a3d; }
+  .level-circle.current { background: linear-gradient(135deg, #e2b340, #c99a2e); border: none; }
+  .level-num { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 800; color: #777; }
+  .level-circle.first .level-num, .level-circle.current .level-num { color: #0f0f0f; }
+  .level-circle.completed .level-num { color: #7bc47b; }
+  .level-title-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .level-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: #e0e0e0; }
+  .start-badge, .current-badge, .completed-badge {
+    font-size: 8px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; padding: 2px 7px; border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .start-badge { color: #e2b340; background: rgba(226, 179, 64, 0.08); }
+  .current-badge { color: #e2b340; background: rgba(226, 179, 64, 0.15); }
+  .completed-badge { color: #7bc47b; background: rgba(123, 196, 123, 0.1); }
+  .collapsed-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+  .collapsed-tag { font-size: 9px; padding: 1px 7px; border-radius: 3px; font-family: 'DM Sans', sans-serif; }
+  .level-right { display: flex; align-items: center; gap: 8px; }
+  .comp-label {
+    font-size: 8px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.06em; font-family: 'DM Sans', sans-serif;
+  }
+  .comp-label.yes { color: #d47b7b; }
+  .comp-label.no { color: #7bc47b; }
+  .expand-arrow { color: #444; font-size: 11px; }
+
+  /* Star Requirements */
+  .stars-container { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+  .star-req { border-radius: 8px; padding: 10px 12px; position: relative; }
+  .star-req.clickable { cursor: pointer; }
+  .star-req.earned { box-shadow: inset 0 0 0 1px rgba(226, 179, 64, 0.3); }
+  .star-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  .star-info { flex: 1; }
+  .star-name-row { display: flex; align-items: center; gap: 7px; margin-bottom: 2px; }
+  .star-name { font-size: 12px; font-weight: 600; letter-spacing: 0.02em; font-family: 'DM Sans', sans-serif; }
+  .star-desc { color: #999; font-size: 11px; line-height: 1.5; font-family: 'DM Sans', sans-serif; padding-left: 19px; }
+  .star-expand { color: #555; font-size: 10px; margin-top: 2px; }
+  .star-details { margin-top: 8px; padding-top: 8px; padding-left: 19px; }
+  .star-detail { display: flex; align-items: baseline; gap: 7px; margin-bottom: 3px; }
+  .star-detail-dot { font-size: 8px; flex-shrink: 0; }
+  .star-detail-text { color: #aaa; font-size: 11px; font-family: 'DM Sans', sans-serif; line-height: 1.4; }
+  .earned-check {
+    font-size: 10px; color: #e2b340; font-weight: 700; margin-left: auto; flex-shrink: 0;
+  }
+
+  /* Gate */
+  .gate { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 0; position: relative; }
+  .gate-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: #252525; }
+  .gate-pill {
+    display: flex; align-items: center; gap: 4px; background: #0f0f0f;
+    padding: 4px 14px; position: relative; z-index: 1; border-radius: 20px; border: 1px solid #2a2a2a;
+  }
+  .gate-text {
+    font-size: 8px; color: #e2b340; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; margin-left: 4px; font-family: 'DM Sans', sans-serif;
+  }
+
+  /* Note */
+  .note { margin-top: 24px; padding: 12px 14px; background: #1a1a1a; border-radius: 8px; border-left: 3px solid #e2b340; }
+  .note p { color: #999; font-size: 11px; line-height: 1.6; }
+  .note-label { color: #e2b340; font-weight: 600; }
+
+  /* Athlete Summary in personal tab */
+  .athlete-summary {
+    background: #161616; border: 1px solid #282828; border-radius: 10px;
+    padding: 16px; margin-bottom: 24px; display: flex; align-items: center; gap: 14px;
+  }
+  .athlete-avatar {
+    width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #2a2a2a, #1e1e1e);
+    border: 1px solid #383838; display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 800; color: #888;
+  }
+  .athlete-meta { flex: 1; }
+  .athlete-name-display {
+    font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: #e0e0e0;
+  }
+  .athlete-level-label { font-size: 11px; color: #888; margin-top: 2px; }
+  .athlete-stars-summary { display: flex; gap: 3px; margin-top: 6px; }
+  .mini-star-earned { color: #e2b340; font-size: 10px; }
+  .mini-star-empty { color: #333; font-size: 10px; }
+</style>
+</head>
+<body>
+<div class="container" id="app"></div>
+
+<script>
+/*
+ * ============================================================
+ *  ATHLETE DATA — EDIT HERE
+ * ============================================================
+ *  Each athlete has:
+ *    name     — display name
+ *    level    — current level (1–5)
+ *    earned   — array of star indices earned at current level
+ *               [0] = first star, [1] = second, [2] = third
+ *               e.g. [0, 2] means first and third stars earned
+ *
+ *  Examples:
+ *    { name: "Алексей", level: 1, earned: [0, 1] }
+ *    → Level 1 athlete, earned stars 1 and 2, missing star 3
+ *
+ *    { name: "Мария", level: 2, earned: [0] }
+ *    → Level 2 athlete (completed all of level 1), earned star 1 at level 2
+ *
+ *    { name: "Дмитрий", level: 1, earned: [] }
+ *    → Brand new, no stars yet
+ * ============================================================
+ */
+const athletes = [
+  { name: "Athlete1",  level: 1, earned: [0, 1] },
+  { name: "Athlete2",    level: 2, earned: [0] },
+  { name: "Athlete3",  level: 1, earned: [] },
+  { name: "Athlete4",    level: 1, earned: [0, 1, 2] },
+  { name: "Athlete5",    level: 3, earned: [1] },
+];
+
+
+/* ============================================================ */
+
+const translations = {
+  en: {
+    title: "Athlete Ranking System",
+    subtitle: "All athletes start at Level 1 · Earn 3 stars to advance",
+    advance: "advance",
+    start: "Start",
+    competitive: "Competitive",
+    nonCompetitive: "Non-competitive",
+    grandfatheringLabel: "Grandfathering:",
+    grandfatheringText: "Athletes who already started the previous 13-point test may complete it for a rare achievement sticker and advancement credit.",
+    overview: "Overview",
+    currentLevel: "Current level",
+    completed: "Completed",
+    earned: "✓",
+  },
+  ru: {
+    title: "Система ранжирования",
+    subtitle: "Все спортсмены начинают с 1-го уровня · Собери 3 звезды для перехода",
+    advance: "переход",
+    start: "Старт",
+    competitive: "Соревновательный",
+    nonCompetitive: "Без соревнований",
+    grandfatheringLabel: "Переходный период:",
+    grandfatheringText: "Спортсмены, которые уже начали сдавать предыдущий тест из 13 пунктов, могут завершить его для получения редкого достижения (стикер) и зачёта продвижения.",
+    overview: "Обзор",
+    currentLevel: "Текущий уровень",
+    completed: "Пройден",
+    earned: "✓",
+  },
+};
+
+const levelsData = {
+  en: [
+    { level: 1, title: "Beginner", competitive: false, stars: [
+      { name: "Technique Fundamentals", type: "observation", description: "Discrete passive observation of four basics", details: ["Hand moves before foot when striking", "Correct hand extension on strikes", "Defenses 3 and 4", "Maintaining threat after completing an action"] },
+      { name: "Time Invested", type: "time", description: "3 months of training", details: [] },
+      { name: "Solo Drill", type: "drill", description: "Level 1 drill performed with flow and correctness", details: [] },
+    ]},
+    { level: 2, title: "Novice", competitive: false, stars: [
+      { name: "Solo Drill", type: "drill", description: "Level 2 drill — increased difficulty", details: [] },
+      { name: "Parry-Riposte Play", type: "observation", description: "Demonstrated quality in parry-riposte exchanges", details: [] },
+      { name: "TBD", type: "pending", description: "Third requirement to be defined", details: [] },
+    ]},
+    { level: 3, title: "Intermediate", competitive: true, stars: [
+      { name: "Solo Drill", type: "drill", description: "Level 3 drill — further progression", details: [] },
+      { name: "Free Play Quality", type: "observation", description: "Fencing with intention — recognizable technique, distance control, decision-making", details: [] },
+      { name: "Competitive Exposure", type: "competitive", description: "Tournament participation or sparring sessions", details: [] },
+    ]},
+    { level: 4, title: "Advanced", competitive: true, stars: [
+      { name: "Solo Drill", type: "drill", description: "Level 4 drill — high difficulty", details: [] },
+      { name: "Lead a Session", type: "leadership", description: "Conduct a training session or significant portion", details: [] },
+      { name: "TBD", type: "pending", description: "To be defined (adaptability in sparring is a candidate)", details: [] },
+    ]},
+    { level: 5, title: "Elite", competitive: true, stars: [
+      { name: "TBD", type: "pending", description: "To be defined", details: [] },
+      { name: "TBD", type: "pending", description: "To be defined", details: [] },
+      { name: "TBD", type: "pending", description: "To be defined", details: [] },
+    ]},
+  ],
+  ru: [
+    { level: 1, title: "Новичок", competitive: false, stars: [
+      { name: "Основы техники", type: "observation", description: "Скрытая оценка тренером четырёх базовых навыков", details: ["Рука движется раньше ноги при ударе", "Правильное выпрямление руки при ударе", "Защиты 3 и 4", "Сохранение угрозы после завершения действия"] },
+      { name: "Стаж", type: "time", description: "3 месяца тренировок", details: [] },
+      { name: "Сольная связка", type: "drill", description: "Связка 1-го уровня — плавное и правильное выполнение", details: [] },
+    ]},
+    { level: 2, title: "Ученик", competitive: false, stars: [
+      { name: "Сольная связка", type: "drill", description: "Связка 2-го уровня — повышенная сложность", details: [] },
+      { name: "Парад-рипост", type: "observation", description: "Качественная работа в парад-рипосте", details: [] },
+      { name: "Не определено", type: "pending", description: "Третье требование будет определено позже", details: [] },
+    ]},
+    { level: 3, title: "Средний", competitive: true, stars: [
+      { name: "Сольная связка", type: "drill", description: "Связка 3-го уровня — дальнейшее усложнение", details: [] },
+      { name: "Свободный бой", type: "observation", description: "Осознанное фехтование — узнаваемая техника, контроль дистанции, принятие решений", details: [] },
+      { name: "Соревновательный опыт", type: "competitive", description: "Участие в турнире или спарринговые поединки", details: [] },
+    ]},
+    { level: 4, title: "Продвинутый", competitive: true, stars: [
+      { name: "Сольная связка", type: "drill", description: "Связка 4-го уровня — высокая сложность", details: [] },
+      { name: "Проведение тренировки", type: "leadership", description: "Провести тренировку или её значительную часть", details: [] },
+      { name: "Не определено", type: "pending", description: "Будет определено позже (адаптивность в спарринге — кандидат)", details: [] },
+    ]},
+    { level: 5, title: "Элита", competitive: true, stars: [
+      { name: "Не определено", type: "pending", description: "Будет определено позже", details: [] },
+      { name: "Не определено", type: "pending", description: "Будет определено позже", details: [] },
+      { name: "Не определено", type: "pending", description: "Будет определено позже", details: [] },
+    ]},
+  ],
+};
+
+const typeColors = {
+  observation: { bg: "#1a2f1a", border: "#2d5a2d", text: "#7bc47b" },
+  time: { bg: "#1a2a3a", border: "#2d4a6a", text: "#7baed4" },
+  drill: { bg: "#3a2a1a", border: "#6a4a2d", text: "#d4a87b" },
+  competitive: { bg: "#3a1a1a", border: "#6a2d2d", text: "#d47b7b" },
+  leadership: { bg: "#2a1a3a", border: "#4a2d6a", text: "#a87bd4" },
+  pending: { bg: "#1e1e1e", border: "#333", text: "#666" },
+};
+
+let currentLang = "ru";
+let currentTab = "overview"; // "overview" or athlete index as string
+let expandedLevels = {};
+let expandedStars = {};
+
+function resetExpanded() {
+  expandedLevels = {};
+  expandedStars = {};
+}
+
+function starSVG(size, filled) {
+  const fill = filled ? "#e2b340" : "#2a2a2a";
+  const stroke = filled ? "#e2b340" : "#444";
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${fill}" stroke="${stroke}" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+}
+
+function checkSVG() {
+  return `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#e2b340" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+}
+
+function renderStarReq(star, levelIdx, starIdx, isEarned, showEarned) {
+  const c = typeColors[star.type];
+  const hasDetails = star.details && star.details.length > 0;
+  const starKey = `${levelIdx}-${starIdx}`;
+  const starExpanded = !!expandedStars[starKey];
+  const filled = star.type !== "pending";
+  const earnedClass = (showEarned && isEarned) ? " earned" : "";
+
+  let html = `<div class="star-req${hasDetails ? " clickable" : ""}${earnedClass}" style="background:${c.bg};border:1px solid ${c.border}" ${hasDetails ? `onclick="event.stopPropagation();toggleStar('${starKey}')"` : ""}>`;
+  html += `<div class="star-top"><div class="star-info">`;
+  html += `<div class="star-name-row">${starSVG(12, filled)}<span class="star-name" style="color:${c.text}">${star.name}</span>`;
+  if (showEarned && isEarned) html += `<span class="earned-check">${checkSVG()}</span>`;
+  html += `</div>`;
+  html += `<p class="star-desc">${star.description}</p>`;
+  html += `</div>`;
+  if (hasDetails) html += `<span class="star-expand">${starExpanded ? "▾" : "▸"}</span>`;
+  html += `</div>`;
+
+  if (starExpanded && hasDetails) {
+    html += `<div class="star-details" style="border-top:1px solid ${c.border}">`;
+    star.details.forEach(d => {
+      html += `<div class="star-detail"><span class="star-detail-dot" style="color:${c.text}">◆</span><span class="star-detail-text">${d}</span></div>`;
+    });
+    html += `</div>`;
+  }
+  html += `</div>`;
+  return html;
+}
+
+function renderLevelCard(level, i, levels, t, athlete) {
+  const isLast = i === levels.length - 1;
+  const expanded = !!expandedLevels[i];
+  const showEarned = !!athlete;
+
+  // Determine level state for athlete view
+  let circleClass = "";
+  let badge = "";
+  if (athlete) {
+    const lvl = level.level;
+    if (lvl < athlete.level) {
+      circleClass = " completed";
+      badge = `<span class="completed-badge">${t.completed}</span>`;
+    } else if (lvl === athlete.level) {
+      circleClass = " current";
+      badge = `<span class="current-badge">${t.currentLevel}</span>`;
+    }
+  } else {
+    if (i === 0) circleClass = " first";
+  }
+
+  let html = `<div class="level-card ${expanded ? "expanded" : ""}" onclick="toggleLevel(${i})">`;
+  html += `<div class="level-header">`;
+  html += `<div class="level-left">`;
+  html += `<div class="level-circle${circleClass}"><span class="level-num">${level.level}</span></div>`;
+  html += `<div>`;
+  html += `<div class="level-title-row"><span class="level-title">${level.title}</span>`;
+  if (!athlete && i === 0) badge = `<span class="start-badge">${t.start}</span>`;
+  html += badge;
+  html += `</div>`;
+
+  if (!expanded) {
+    html += `<div class="collapsed-tags">`;
+    level.stars.forEach((s, si) => {
+      const c = typeColors[s.type];
+      let earned = false;
+      if (athlete) {
+        if (level.level < athlete.level) earned = true;
+        else if (level.level === athlete.level) earned = athlete.earned.includes(si);
+      }
+      const opacity = (athlete && !earned && level.level === athlete.level) ? "opacity:0.4;" : "";
+      html += `<span class="collapsed-tag" style="color:${c.text};background:${c.bg};${opacity}">${s.name}${earned ? " ✓" : ""}</span>`;
+    });
+    html += `</div>`;
+  }
+
+  html += `</div></div>`;
+
+  html += `<div class="level-right">`;
+  if (level.competitive) {
+    html += `<span class="comp-label yes">${t.competitive}</span>`;
+  } else {
+    html += `<span class="comp-label no">${t.nonCompetitive}</span>`;
+  }
+  html += `<span class="expand-arrow">${expanded ? "▾" : "▸"}</span>`;
+  html += `</div></div>`;
+
+  if (expanded) {
+    html += `<div class="stars-container">`;
+    level.stars.forEach((star, si) => {
+      let isEarned = false;
+      if (athlete) {
+        if (level.level < athlete.level) isEarned = true;
+        else if (level.level === athlete.level) isEarned = athlete.earned.includes(si);
+      }
+      html += renderStarReq(star, i, si, isEarned, showEarned);
+    });
+    html += `</div>`;
+  }
+
+  html += `</div>`;
+
+  // Gate
+  if (!isLast) {
+    let gateCompleted = athlete && level.level < athlete.level;
+    html += `<div class="gate"><div class="gate-line"></div><div class="gate-pill">`;
+    if (gateCompleted) {
+      html += `${starSVG(11, true)}${starSVG(11, true)}${starSVG(11, true)}`;
+    } else if (athlete && level.level === athlete.level) {
+      for (let g = 0; g < 3; g++) {
+        html += starSVG(11, athlete.earned.includes(g));
+      }
+    } else {
+      html += `${starSVG(11, !athlete)}${starSVG(11, !athlete)}${starSVG(11, !athlete)}`;
+    }
+    html += `<span class="gate-text">${t.advance}</span>`;
+    html += `</div></div>`;
+  }
+
+  return html;
+}
+
+function render() {
+  const t = translations[currentLang];
+  const levels = levelsData[currentLang];
+  const app = document.getElementById("app");
+  let html = "";
+
+  // Language toggle
+  html += `<div class="lang-toggle"><div class="lang-toggle-inner">`;
+  html += `<button class="lang-btn ${currentLang === "ru" ? "active" : ""}" onclick="switchLang('ru')">РУС</button>`;
+  html += `<button class="lang-btn ${currentLang === "en" ? "active" : ""}" onclick="switchLang('en')">ENG</button>`;
+  html += `</div></div>`;
+
+  // Header
+  html += `<div class="header"><h1>${t.title}</h1><p>${t.subtitle}</p></div>`;
+
+  // Main tabs
+  html += `<div class="main-tabs">`;
+  html += `<button class="main-tab ${currentTab === "overview" ? "active" : ""}" onclick="switchTab('overview')">${t.overview}</button>`;
+  athletes.forEach((a, i) => {
+    html += `<button class="main-tab ${currentTab === String(i) ? "active" : ""}" onclick="switchTab('${i}')">${a.name}</button>`;
+  });
+  html += `</div>`;
+
+  if (currentTab === "overview") {
+    // Overview: plain ranking system
+    levels.forEach((level, i) => {
+      html += renderLevelCard(level, i, levels, t, null);
+    });
+
+    // Grandfathering note
+    html += `<div class="note"><p><span class="note-label">${t.grandfatheringLabel} </span>${t.grandfatheringText}</p></div>`;
+
+  } else {
+    // Athlete personal view
+    const athlete = athletes[parseInt(currentTab)];
+    const currentLevelData = levels[athlete.level - 1];
+
+    // Summary card
+    const initial = athlete.name.charAt(0).toUpperCase();
+    const earnedCount = athlete.earned.length;
+    html += `<div class="athlete-summary">`;
+    html += `<div class="athlete-avatar">${initial}</div>`;
+    html += `<div class="athlete-meta">`;
+    html += `<div class="athlete-name-display">${athlete.name}</div>`;
+    html += `<div class="athlete-level-label">${t.currentLevel}: ${currentLevelData.title} (${athlete.level})</div>`;
+    html += `<div class="athlete-stars-summary">`;
+    for (let s = 0; s < 3; s++) {
+      html += athlete.earned.includes(s)
+        ? `<span class="mini-star-earned">${starSVG(14, true)}</span>`
+        : `<span class="mini-star-empty">${starSVG(14, false)}</span>`;
+    }
+    html += `</div></div></div>`;
+
+    // Full progression with athlete state
+    levels.forEach((level, i) => {
+      html += renderLevelCard(level, i, levels, t, athlete);
+    });
+  }
+
+  app.innerHTML = html;
+}
+
+function switchLang(lang) { currentLang = lang; render(); }
+function switchTab(tab) { currentTab = tab; resetExpanded(); render(); }
+function toggleLevel(i) { expandedLevels[i] = !expandedLevels[i]; render(); }
+function toggleStar(key) { expandedStars[key] = !expandedStars[key]; render(); }
+
+render();
+</script>
+</body>
+</html>
