@@ -251,13 +251,13 @@ const athletes = [
   { name: "Charlie",   level: 1, earned: [], achievements: [] },
   { name: "Delta",   level: 1, earned: [], achievements: []},
   { name: "Echo",   level: 1, earned: [], achievements: []},
-  { name: "Foxtrot",   level: 1, earned: [], achievements: [] },
+  { name: "Foxtrot",   level: 1, earned: [], achievements: [] },  
+  { name: "Golf",   level: 1, earned: [], achievements: [] },  
+  { name: "Hotel",   level: 1, earned: [], achievements: [] },
+  { name: "India",  level: 1, earned: [], achievements: [] },
+  { name: "Juliet",  level: 1, earned: [], achievements: [] },
   { name: "Kilo",   level: 1, earned: [], achievements: [] },
-  { name: "Oscar",   level: 1, earned: [], achievements: [] },
-  { name: "Romeo",   level: 1, earned: [], achievements: [] },
-  { name: "Sierra",  level: 1, earned: [], achievements: [] },
-  { name: "Tango",  level: 1, earned: [], achievements: [] },
-  { name: "Victor",  level: 1, earned: [], achievements: [] },
+  { name: "Lima",  level: 1, earned: [], achievements: [] },
 ];
 
 
@@ -283,16 +283,16 @@ const translations = {
     achievements: "Achievements",
   },
   ru: {
-    title: "Система ранжирования",
-    subtitle: "Все спортсмены начинают с 1-го уровня · Для перехода на следующий уровень - 3 звезды",
+    title: "Ранговая система атлетов",
+    subtitle: "Все атлеты начинают с 1-го уровня · Для перехода на следующий уровень - 3 звезды",
     advance: "переход",
     start: "Старт",
     competitive: "Соревновательный",
-    nonCompetitive: "Без соревнований",
-    grandfatheringLabel: "Переходный период:",
-    grandfatheringText: "Спортсмены, которые уже начали сдавать предыдущий тест из 13 пунктов, могут завершить его для получения редкого достижения (стикер) и зачёта продвижения.",
+    nonCompetitive: "Несоревновательный",
+    grandfatheringLabel: "Переход на новую систему:",
+    grandfatheringText: "Спортсмены, которые уже начали сдавать нормативы из 13 пунктов, могут завершить его для получения редкого достижения и зачёта продвижения.",
     overview: "Обзор",
-    athletesTab: "Спортсмены",
+    athletesTab: "Атлеты",
     currentLevel: "Текущий уровень",
     completed: "Пройден",
     level: "Уровень",
@@ -305,9 +305,9 @@ const translations = {
 const levelsData = {
   en: [
     { level: 1, title: "Beginner", competitive: false, stars: [
-      { name: "Technique Fundamentals", type: "observation", description: "Discrete passive observation of four basics", details: ["Hand moves before foot when striking", "Correct hand extension on strikes", "Defenses 3 and 4", "Maintaining threat after completing an action"] },
-      { name: "Time Invested", type: "time", description: "3 months of training", details: [] },
       { name: "Solo Drill", type: "drill", description: "Level 1 drill performed with flow and correctness", details: [] },
+      { name: "Technique Fundamentals", type: "observation", description: "Discrete passive observation of four basics", details: ["Hand moves before foot when striking", "Correct hand extension on strikes", "Defenses 3 and 4", "Maintaining threat after completing an action"] },
+      { name: "Time Invested", type: "time", description: "3 months of training", details: [] },      
     ]},
     { level: 2, title: "Novice", competitive: false, stars: [
       { name: "Solo Drill", type: "drill", description: "Level 2 drill — increased difficulty", details: [] },
@@ -322,7 +322,13 @@ const levelsData = {
     { level: 4, title: "Advanced", competitive: true, stars: [
       { name: "Solo Drill", type: "drill", description: "Level 4 drill — high difficulty", details: [] },
       { name: "Lead a Session", type: "leadership", description: "Conduct a training session or significant portion", details: [] },
-      { name: "TBD", type: "pending", description: "To be defined (adaptability in sparring is a candidate)", details: [] },
+      { name: "Adaptability in Sparring", type: "observation", description: "Adjusts tactics and technique based on the opponent — doesn't rely on a single pattern", details: [
+              "Recognizes when an action isn't working and changes approach mid-bout",
+              "Adjusts distance and timing against opponents of different body types and speeds",
+              "Uses more than one opening strategy — has options, not just a default",
+              "Switches between offensive and defensive initiative based on the situation",
+              "Reads opponent habits and exploits patterns rather than fencing the same way regardless of who is in front"
+      ] },
     ]},
     { level: 5, title: "Elite", competitive: true, stars: [
       { name: "TBD", type: "pending", description: "To be defined", details: [] },
@@ -332,9 +338,9 @@ const levelsData = {
   ],
   ru: [
     { level: 1, title: "Новичок", competitive: false, stars: [
-      { name: "Основы техники", type: "observation", description: "Скрытая оценка тренером четырёх базовых навыков", details: ["Рука движется раньше ноги при ударе", "Правильное выпрямление руки при ударе", "Защиты 3 и 4", "Сохранение угрозы после завершения действия"] },
-      { name: "Стаж", type: "time", description: "3 месяца тренировок", details: [] },
       { name: "Сольная связка", type: "drill", description: "Связка 1-го уровня — плавное и правильное выполнение", details: [] },
+      { name: "Основы техники", type: "observation", description: "Скрытая оценка тренером четырёх базовых навыков", details: ["Рука движется раньше ноги при ударе", "Правильное выпрямление руки при ударе", "Защиты 3 и 4", "Сохранение угрозы после завершения действия"] },
+      { name: "Стаж", type: "time", description: "3 месяца тренировок", details: [] },      
     ]},
     { level: 2, title: "Ученик", competitive: false, stars: [
       { name: "Сольная связка", type: "drill", description: "Связка 2-го уровня — повышенная сложность", details: [] },
@@ -343,13 +349,19 @@ const levelsData = {
     ]},
     { level: 3, title: "Средний", competitive: true, stars: [
       { name: "Сольная связка", type: "drill", description: "Связка 3-го уровня — дальнейшее усложнение", details: [] },
-      { name: "Свободный бой", type: "observation", description: "Осознанное фехтование — узнаваемая техника, контроль дистанции, принятие решений", details: [] },
-      { name: "Соревновательный опыт", type: "competitive", description: "Участие в турнире или спарринговые поединки", details: [] },
+      { name: "Фриплей", type: "observation", description: "Осознанное фехтование — узнаваемая техника, контроль дистанции, принятие решений", details: [] },
+      { name: "Соревновательный опыт", type: "competitive", description: "Участие в турнире или спарринговые поединки", details: ["Участие в 1 турнире = 3 спарринга вне тренировок. Если атлет участвует в турнире или набирает достаточное количество спаррингов до достижения 3 уровня, то этот пункт засчитывается автоматически (ретроспективно)."] },
     ]},
     { level: 4, title: "Продвинутый", competitive: true, stars: [
       { name: "Сольная связка", type: "drill", description: "Связка 4-го уровня — высокая сложность", details: [] },
       { name: "Проведение тренировки", type: "leadership", description: "Провести тренировку или её значительную часть", details: [] },
-      { name: "Не определено", type: "pending", description: "Будет определено позже (адаптивность в спарринге — кандидат)", details: [] },
+      { name: "Адаптивность в спарринге", type: "observation", description: "Меняет тактику и технику в зависимости от противника — не полагается на один и тот же шаблон", details: [
+              "Распознаёт, когда действие не работает, и меняет подход по ходу боя",
+              "Подстраивает дистанцию и тайминг под противников разного телосложения и скорости",
+              "Использует больше одной стратегии начала — есть варианты, а не только один шаблон",
+              "Переключается между наступательной и оборонительной инициативой в зависимости от ситуации",
+              "Считывает привычки противника и использует его паттерны, а не фехтует одинаково вне зависимости от оппонента"
+      ] },
     ]},
     { level: 5, title: "Элита", competitive: true, stars: [
       { name: "Не определено", type: "pending", description: "Будет определено позже", details: [] },
