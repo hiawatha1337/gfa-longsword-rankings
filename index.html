@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -16,210 +17,211 @@
   }
   .container { max-width: 500px; margin: 0 auto; }
 
-  /* Language Toggle */
-  .lang-toggle { display: flex; justify-content: flex-end; margin-bottom: 16px; }
-  .lang-toggle-inner {
-    display: flex; background: #1a1a1a; border-radius: 8px; padding: 3px; border: 1px solid #252525;
-  }
-  .lang-btn {
-    padding: 5px 14px; border: none; border-radius: 6px; cursor: pointer;
-    background: transparent; color: #666; font-size: 12px; font-weight: 700;
-    font-family: 'DM Sans', sans-serif; text-transform: uppercase;
-    letter-spacing: 0.06em; transition: all 0.2s ease;
-  }
-  .lang-btn.active { background: #2a2a2a; color: #e2b340; }
+/* Language Toggle */
+.lang-toggle { display: flex; justify-content: flex-end; margin-bottom: 16px; }
+.lang-toggle-inner {
+display: flex; background: #1a1a1a; border-radius: 8px; padding: 3px; border: 1px solid #252525;
+}
+.lang-btn {
+padding: 5px 14px; border: none; border-radius: 6px; cursor: pointer;
+background: transparent; color: #666; font-size: 12px; font-weight: 700;
+font-family: ‘DM Sans’, sans-serif; text-transform: uppercase;
+letter-spacing: 0.06em; transition: all 0.2s ease;
+}
+.lang-btn.active { background: #2a2a2a; color: #e2b340; }
 
-  /* Header */
-  .header { margin-bottom: 20px; text-align: center; }
-  .header h1 {
-    font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 800;
-    color: #e8e8e8; margin-bottom: 6px; letter-spacing: -0.02em;
-  }
-  .header p { color: #666; font-size: 12px; line-height: 1.5; }
+/* Header */
+.header { margin-bottom: 20px; text-align: center; }
+.header h1 {
+font-family: ‘Playfair Display’, serif; font-size: 26px; font-weight: 800;
+color: #e8e8e8; margin-bottom: 6px; letter-spacing: -0.02em;
+}
+.header p { color: #666; font-size: 12px; line-height: 1.5; }
 
-  /* Main Tabs */
-  .main-tabs {
-    display: flex; gap: 0; margin-bottom: 24px;
-    border-bottom: 1px solid #252525; padding-bottom: 0;
-  }
-  .main-tab {
-    flex: 1; padding: 10px 16px; border: none; cursor: pointer;
-    background: transparent; color: #555; font-size: 13px; font-weight: 600;
-    font-family: 'DM Sans', sans-serif; text-align: center;
-    border-bottom: 2px solid transparent; transition: all 0.2s ease;
-    margin-bottom: -1px;
-  }
-  .main-tab.active { color: #e2b340; border-bottom-color: #e2b340; }
-  .main-tab:hover:not(.active) { color: #888; }
+/* Main Tabs */
+.main-tabs {
+display: flex; gap: 0; margin-bottom: 24px;
+border-bottom: 1px solid #252525; padding-bottom: 0;
+}
+.main-tab {
+flex: 1; padding: 10px 16px; border: none; cursor: pointer;
+background: transparent; color: #555; font-size: 13px; font-weight: 600;
+font-family: ‘DM Sans’, sans-serif; text-align: center;
+border-bottom: 2px solid transparent; transition: all 0.2s ease;
+margin-bottom: -1px;
+}
+.main-tab.active { color: #e2b340; border-bottom-color: #e2b340; }
+.main-tab:hover:not(.active) { color: #888; }
 
-  /* Level Card */
-  .level-card {
-    background: #161616; border: 1px solid #222; border-radius: 12px;
-    padding: 12px 18px; cursor: pointer; transition: all 0.2s ease;
-  }
-  .level-card.expanded { border-color: #333; padding: 18px; }
-  .level-header { display: flex; align-items: center; justify-content: space-between; }
-  .level-left { display: flex; align-items: center; gap: 12px; }
-  .level-circle {
-    width: 36px; height: 36px; border-radius: 50%; background: #1e1e1e;
-    border: 1px solid #333; display: flex; align-items: center;
-    justify-content: center; flex-shrink: 0;
-  }
-  .level-circle.first { background: linear-gradient(135deg, #e2b340, #c99a2e); border: none; }
-  .level-num { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 800; color: #777; }
-  .level-circle.first .level-num { color: #0f0f0f; }
-  .level-title-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .level-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: #e0e0e0; }
-  .start-badge {
-    font-size: 8px; font-weight: 700; color: #e2b340; text-transform: uppercase;
-    letter-spacing: 0.08em; background: rgba(226, 179, 64, 0.08);
-    padding: 2px 7px; border-radius: 4px; font-family: 'DM Sans', sans-serif;
-  }
-  .collapsed-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
-  .collapsed-tag { font-size: 9px; padding: 1px 7px; border-radius: 3px; font-family: 'DM Sans', sans-serif; }
-  .level-right { display: flex; align-items: center; gap: 8px; }
-  .comp-label {
-    font-size: 8px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.06em; font-family: 'DM Sans', sans-serif;
-  }
-  .comp-label.yes { color: #d47b7b; }
-  .comp-label.no { color: #7bc47b; }
-  .expand-arrow { color: #444; font-size: 11px; }
+/* Level Card */
+.level-card {
+background: #161616; border: 1px solid #222; border-radius: 12px;
+padding: 12px 18px; cursor: pointer; transition: all 0.2s ease;
+}
+.level-card.expanded { border-color: #333; padding: 18px; }
+.level-header { display: flex; align-items: center; justify-content: space-between; }
+.level-left { display: flex; align-items: center; gap: 12px; }
+.level-circle {
+width: 36px; height: 36px; border-radius: 50%; background: #1e1e1e;
+border: 1px solid #333; display: flex; align-items: center;
+justify-content: center; flex-shrink: 0;
+}
+.level-circle.first { background: linear-gradient(135deg, #e2b340, #c99a2e); border: none; }
+.level-num { font-family: ‘Playfair Display’, serif; font-size: 16px; font-weight: 800; color: #777; }
+.level-circle.first .level-num { color: #0f0f0f; }
+.level-title-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.level-title { font-family: ‘Playfair Display’, serif; font-size: 17px; font-weight: 700; color: #e0e0e0; }
+.start-badge {
+font-size: 8px; font-weight: 700; color: #e2b340; text-transform: uppercase;
+letter-spacing: 0.08em; background: rgba(226, 179, 64, 0.08);
+padding: 2px 7px; border-radius: 4px; font-family: ‘DM Sans’, sans-serif;
+}
+.collapsed-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.collapsed-tag { font-size: 9px; padding: 1px 7px; border-radius: 3px; font-family: ‘DM Sans’, sans-serif; }
+.level-right { display: flex; align-items: center; gap: 8px; }
+.comp-label {
+font-size: 8px; font-weight: 600; text-transform: uppercase;
+letter-spacing: 0.06em; font-family: ‘DM Sans’, sans-serif;
+}
+.comp-label.yes { color: #d47b7b; }
+.comp-label.no { color: #7bc47b; }
+.expand-arrow { color: #444; font-size: 11px; }
 
-  /* Star Requirements */
-  .stars-container { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
-  .star-req { border-radius: 8px; padding: 10px 12px; position: relative; }
-  .star-req.clickable { cursor: pointer; }
-  .star-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
-  .star-info { flex: 1; }
-  .star-name-row { display: flex; align-items: center; gap: 7px; margin-bottom: 2px; }
-  .star-name { font-size: 12px; font-weight: 600; letter-spacing: 0.02em; font-family: 'DM Sans', sans-serif; }
-  .star-desc { color: #999; font-size: 11px; line-height: 1.5; font-family: 'DM Sans', sans-serif; padding-left: 19px; }
-  .star-expand { color: #555; font-size: 10px; margin-top: 2px; }
-  .star-details { margin-top: 8px; padding-top: 8px; padding-left: 19px; }
-  .star-detail { display: flex; align-items: baseline; gap: 7px; margin-bottom: 3px; }
-  .star-detail-dot { font-size: 8px; flex-shrink: 0; }
-  .star-detail-text { color: #aaa; font-size: 11px; font-family: 'DM Sans', sans-serif; line-height: 1.4; }
+/* Star Requirements */
+.stars-container { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.star-req { border-radius: 8px; padding: 10px 12px; position: relative; }
+.star-req.clickable { cursor: pointer; }
+.star-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.star-info { flex: 1; }
+.star-name-row { display: flex; align-items: center; gap: 7px; margin-bottom: 2px; }
+.star-name { font-size: 12px; font-weight: 600; letter-spacing: 0.02em; font-family: ‘DM Sans’, sans-serif; }
+.star-desc { color: #999; font-size: 11px; line-height: 1.5; font-family: ‘DM Sans’, sans-serif; padding-left: 19px; }
+.star-expand { color: #555; font-size: 10px; margin-top: 2px; }
+.star-details { margin-top: 8px; padding-top: 8px; padding-left: 19px; }
+.star-detail { display: flex; align-items: baseline; gap: 7px; margin-bottom: 3px; }
+.star-detail-dot { font-size: 8px; flex-shrink: 0; }
+.star-detail-text { color: #aaa; font-size: 11px; font-family: ‘DM Sans’, sans-serif; line-height: 1.4; }
 
-  /* Gate */
-  .gate { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 0; position: relative; }
-  .gate-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: #252525; }
-  .gate-pill {
-    display: flex; align-items: center; gap: 4px; background: #0f0f0f;
-    padding: 4px 14px; position: relative; z-index: 1; border-radius: 20px; border: 1px solid #2a2a2a;
-  }
-  .gate-text {
-    font-size: 8px; color: #e2b340; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.1em; margin-left: 4px; font-family: 'DM Sans', sans-serif;
-  }
+/* Gate */
+.gate { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 0; position: relative; }
+.gate-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: #252525; }
+.gate-pill {
+display: flex; align-items: center; gap: 4px; background: #0f0f0f;
+padding: 4px 14px; position: relative; z-index: 1; border-radius: 20px; border: 1px solid #2a2a2a;
+}
+.gate-text {
+font-size: 8px; color: #e2b340; font-weight: 700; text-transform: uppercase;
+letter-spacing: 0.1em; margin-left: 4px; font-family: ‘DM Sans’, sans-serif;
+}
 
-  /* Note */
-  .note { margin-top: 24px; padding: 12px 14px; background: #1a1a1a; border-radius: 8px; border-left: 3px solid #e2b340; }
-  .note p { color: #999; font-size: 11px; line-height: 1.6; }
-  .note-label { color: #e2b340; font-weight: 600; }
+/* Note */
+.note { margin-top: 24px; padding: 12px 14px; background: #1a1a1a; border-radius: 8px; border-left: 3px solid #e2b340; }
+.note p { color: #999; font-size: 11px; line-height: 1.6; }
+.note-label { color: #e2b340; font-weight: 600; }
 
-  /* Athlete Cards Grid */
-  .athletes-grid { display: flex; flex-direction: column; gap: 10px; }
-  .athlete-card {
-    background: #161616; border: 1px solid #252525; border-radius: 12px;
-    padding: 16px; cursor: pointer; transition: all 0.2s ease;
-  }
-  .athlete-card:hover { border-color: #333; }
-  .athlete-card.expanded { border-color: #383838; }
-  .athlete-card-header { display: flex; align-items: center; gap: 14px; }
-  .athlete-avatar {
-    width: 42px; height: 42px; border-radius: 50%;
-    background: linear-gradient(135deg, #2a2a2a, #1e1e1e);
-    border: 1px solid #383838; display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 800; color: #777;
-    flex-shrink: 0;
-  }
-  .athlete-card-info { flex: 1; min-width: 0; }
-  .athlete-card-name {
-    font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: #e0e0e0;
-  }
-  .athlete-card-level { font-size: 11px; color: #888; margin-top: 1px; }
-  .athlete-card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-  .athlete-card-stars { display: flex; gap: 3px; }
-  .athlete-card-arrow { color: #444; font-size: 11px; }
+/* Athlete Cards Grid */
+.athletes-grid { display: flex; flex-direction: column; gap: 10px; }
+.athlete-card {
+background: #161616; border: 1px solid #252525; border-radius: 12px;
+padding: 16px; cursor: pointer; transition: all 0.2s ease;
+}
+.athlete-card:hover { border-color: #333; }
+.athlete-card.expanded { border-color: #383838; }
+.athlete-card-header { display: flex; align-items: center; gap: 14px; }
+.athlete-avatar {
+width: 42px; height: 42px; border-radius: 50%;
+background: linear-gradient(135deg, #2a2a2a, #1e1e1e);
+border: 1px solid #383838; display: flex; align-items: center; justify-content: center;
+font-family: ‘Playfair Display’, serif; font-size: 17px; font-weight: 800; color: #777;
+flex-shrink: 0;
+}
+.athlete-card-info { flex: 1; min-width: 0; }
+.athlete-card-name {
+font-family: ‘Playfair Display’, serif; font-size: 16px; font-weight: 700; color: #e0e0e0;
+}
+.athlete-card-level { font-size: 11px; color: #888; margin-top: 1px; }
+.athlete-card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.athlete-card-stars { display: flex; gap: 3px; }
+.athlete-card-arrow { color: #444; font-size: 11px; }
 
-  /* Athlete expanded detail */
-  .athlete-detail { margin-top: 16px; padding-top: 16px; border-top: 1px solid #252525; }
-  .athlete-level-row {
-    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
-  }
-  .athlete-level-circle {
-    width: 28px; height: 28px; border-radius: 50%; display: flex;
-    align-items: center; justify-content: center; flex-shrink: 0;
-    font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 800;
-  }
-  .athlete-level-circle.completed-sm { background: #1a3a1a; border: 1px solid #2d5a2d; color: #7bc47b; }
-  .athlete-level-circle.current-sm { background: linear-gradient(135deg, #e2b340, #c99a2e); border: none; color: #0f0f0f; }
-  .athlete-level-circle.future-sm { background: #1a1a1a; border: 1px solid #2a2a2a; color: #444; }
-  .athlete-level-name { font-size: 13px; font-weight: 600; color: #ccc; flex: 1; }
-  .athlete-level-name.future { color: #444; }
-  .athlete-level-stars { display: flex; gap: 2px; }
-  .athlete-star-item {
-    display: flex; align-items: center; gap: 5px; padding: 4px 0;
-  }
-  .athlete-star-label { font-size: 11px; color: #888; font-family: 'DM Sans', sans-serif; }
-  .athlete-star-label.earned-label { color: #ccc; }
-  .athlete-star-check { color: #e2b340; font-size: 10px; }
-  .athlete-star-missing { color: #333; font-size: 10px; }
-  .athlete-stars-detail {
-    margin-left: 38px; margin-bottom: 8px; display: flex; flex-direction: column; gap: 3px;
-  }
+/* Athlete expanded detail */
+.athlete-detail { margin-top: 16px; padding-top: 16px; border-top: 1px solid #252525; }
+.athlete-level-row {
+display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+}
+.athlete-level-circle {
+width: 28px; height: 28px; border-radius: 50%; display: flex;
+align-items: center; justify-content: center; flex-shrink: 0;
+font-family: ‘Playfair Display’, serif; font-size: 13px; font-weight: 800;
+}
+.athlete-level-circle.completed-sm { background: #1a3a1a; border: 1px solid #2d5a2d; color: #7bc47b; }
+.athlete-level-circle.current-sm { background: linear-gradient(135deg, #e2b340, #c99a2e); border: none; color: #0f0f0f; }
+.athlete-level-circle.future-sm { background: #1a1a1a; border: 1px solid #2a2a2a; color: #444; }
+.athlete-level-name { font-size: 13px; font-weight: 600; color: #ccc; flex: 1; }
+.athlete-level-name.future { color: #444; }
+.athlete-level-stars { display: flex; gap: 2px; }
+.athlete-star-item {
+display: flex; align-items: center; gap: 5px; padding: 4px 0;
+}
+.athlete-star-label { font-size: 11px; color: #888; font-family: ‘DM Sans’, sans-serif; }
+.athlete-star-label.earned-label { color: #ccc; }
+.athlete-star-check { color: #e2b340; font-size: 10px; }
+.athlete-star-missing { color: #333; font-size: 10px; }
+.athlete-stars-detail {
+margin-left: 38px; margin-bottom: 8px; display: flex; flex-direction: column; gap: 3px;
+}
 
-  /* Back button */
-  .back-btn {
-    display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
-    background: #1a1a1a; border: 1px solid #252525; border-radius: 8px;
-    color: #888; font-size: 12px; font-family: 'DM Sans', sans-serif;
-    cursor: pointer; margin-bottom: 16px; transition: all 0.2s ease;
-  }
-  .back-btn:hover { color: #ccc; border-color: #383838; }
+/* Back button */
+.back-btn {
+display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+background: #1a1a1a; border: 1px solid #252525; border-radius: 8px;
+color: #888; font-size: 12px; font-family: ‘DM Sans’, sans-serif;
+cursor: pointer; margin-bottom: 16px; transition: all 0.2s ease;
+}
+.back-btn:hover { color: #ccc; border-color: #383838; }
 
-  /* Achievements */
-  .achievements-row {
-    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;
-  }
-  .achievement-badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 6px;
-    padding: 3px 8px; cursor: pointer; transition: all 0.2s ease;
-    font-size: 11px; font-family: 'DM Sans', sans-serif;
-  }
-  .achievement-badge:hover { border-color: #444; background: #222; }
-  .achievement-badge-emoji { font-size: 13px; }
-  .achievement-badge-name { color: #aaa; font-weight: 500; font-size: 10px; }
-  .achievement-popup {
-    margin-top: 8px; padding: 10px 12px;
-    background: #1a1a1a; border: 1px solid #333; border-radius: 8px;
-    animation: popupFade 0.15s ease;
-  }
-  .achievement-popup-header {
-    display: flex; align-items: center; gap: 6px; margin-bottom: 4px;
-  }
-  .achievement-popup-emoji { font-size: 16px; }
-  .achievement-popup-name {
-    font-size: 13px; font-weight: 600; color: #e0e0e0; font-family: 'DM Sans', sans-serif;
-  }
-  .achievement-popup-desc {
-    font-size: 11px; color: #999; line-height: 1.5; font-family: 'DM Sans', sans-serif;
-    padding-left: 22px;
-  }
-  @keyframes popupFade {
-    from { opacity: 0; transform: translateY(-4px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .achievements-section {
-    margin-top: 12px; padding-top: 12px; border-top: 1px solid #252525;
-  }
-  .achievements-section-label {
-    font-size: 10px; font-weight: 600; color: #555; text-transform: uppercase;
-    letter-spacing: 0.08em; margin-bottom: 8px; font-family: 'DM Sans', sans-serif;
-  }
+/* Achievements */
+.achievements-row {
+display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;
+}
+.achievement-badge {
+display: inline-flex; align-items: center; gap: 4px;
+background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 6px;
+padding: 3px 8px; cursor: pointer; transition: all 0.2s ease;
+font-size: 11px; font-family: ‘DM Sans’, sans-serif;
+}
+.achievement-badge:hover { border-color: #444; background: #222; }
+.achievement-badge-emoji { font-size: 13px; }
+.achievement-badge-name { color: #aaa; font-weight: 500; font-size: 10px; }
+.achievement-popup {
+margin-top: 8px; padding: 10px 12px;
+background: #1a1a1a; border: 1px solid #333; border-radius: 8px;
+animation: popupFade 0.15s ease;
+}
+.achievement-popup-header {
+display: flex; align-items: center; gap: 6px; margin-bottom: 4px;
+}
+.achievement-popup-emoji { font-size: 16px; }
+.achievement-popup-name {
+font-size: 13px; font-weight: 600; color: #e0e0e0; font-family: ‘DM Sans’, sans-serif;
+}
+.achievement-popup-desc {
+font-size: 11px; color: #999; line-height: 1.5; font-family: ‘DM Sans’, sans-serif;
+padding-left: 22px;
+}
+@keyframes popupFade {
+from { opacity: 0; transform: translateY(-4px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.achievements-section {
+margin-top: 12px; padding-top: 12px; border-top: 1px solid #252525;
+}
+.achievements-section-label {
+font-size: 10px; font-weight: 600; color: #555; text-transform: uppercase;
+letter-spacing: 0.08em; margin-bottom: 8px; font-family: ‘DM Sans’, sans-serif;
+}
 </style>
+
 </head>
 <body>
 <div class="container" id="app"></div>
@@ -317,10 +319,9 @@ const levelsData = {
     { level: 3, title: "Intermediate", competitive: true, stars: [
       { name: "Solo Drill", type: "drill", description: "Level 3 drill — further progression", details: [] },
       { name: "Free Play Quality", type: "observation", description: "Fencing with intention — recognizable technique, distance control, decision-making", details: [] },
-      { name: "Competitive Exposure", type: "competitive", description: "Tournament participation or sparring sessions", details: [] },
+      { name: "Competitive Exposure", type: "competitive", description: "Tournament participation or sparring sessions", details: ["1 tournament = 3 sparring sessions outside of regular training. If an athlete participates in a tournament or accumulates enough sparring sessions before reaching Level 3, this requirement is credited retroactively."] },
     ]},
     { level: 4, title: "Advanced", competitive: true, stars: [
-      { name: "Solo Drill", type: "drill", description: "Level 4 drill — high difficulty", details: [] },
       { name: "Lead a Session", type: "leadership", description: "Conduct a training session or significant portion", details: [] },
       { name: "Adaptability in Sparring", type: "observation", description: "Adjusts tactics and technique based on the opponent — doesn't rely on a single pattern", details: [
               "Recognizes when an action isn't working and changes approach mid-bout",
@@ -329,11 +330,12 @@ const levelsData = {
               "Switches between offensive and defensive initiative based on the situation",
               "Reads opponent habits and exploits patterns rather than fencing the same way regardless of who is in front"
       ] },
+      { name: "Tournament Participation", type: "competitive", description: "Participated in 3 tournaments", details: ["Credited retroactively if achieved before reaching Level 4"] },
     ]},
     { level: 5, title: "Elite", competitive: true, stars: [
-      { name: "TBD", type: "pending", description: "To be defined", details: [] },
       { name: "Masterclass", type: "leadership", description: "Prepare and conduct a masterclass on a fencing topic — original analysis, drill design, and teaching", details: [] },
-      { name: "TBD", type: "pending", description: "To be defined", details: [] },
+      { name: "Active Competitive Record", type: "competitive", description: "Maintain sustained tournament presence — 5 tournaments total", details: ["Credited retroactively if achieved before reaching Level 5"] },
+      { name: "Competitive Achievement", type: "competitive", description: "Proven tournament results beyond participation", details: ["Qualify for Advanced at 1 tournament, or qualify for Basic playoffs at 3 separate tournaments", "Credited retroactively if achieved before reaching Level 5"] },
     ]},
   ],
   ru: [
@@ -353,7 +355,6 @@ const levelsData = {
       { name: "Соревновательный опыт", type: "competitive", description: "Участие в турнире или спарринговые поединки", details: ["Участие в 1 турнире = 3 спарринга вне тренировок. Если атлет участвует в турнире или набирает достаточное количество спаррингов до достижения 3 уровня, то этот пункт засчитывается автоматически (ретроспективно)."] },
     ]},
     { level: 4, title: "Продвинутый", competitive: true, stars: [
-      { name: "Сольная связка", type: "drill", description: "Связка 4-го уровня — высокая сложность", details: [] },
       { name: "Проведение тренировки", type: "leadership", description: "Провести тренировку или её значительную часть", details: [] },
       { name: "Адаптивность в спарринге", type: "observation", description: "Меняет тактику и технику в зависимости от противника — не полагается на один и тот же шаблон", details: [
               "Распознаёт, когда действие не работает, и меняет подход по ходу боя",
@@ -362,11 +363,12 @@ const levelsData = {
               "Переключается между наступательной и оборонительной инициативой в зависимости от ситуации",
               "Считывает привычки противника и использует его паттерны, а не фехтует одинаково вне зависимости от оппонента"
       ] },
+      { name: "Участие в турнирах", type: "competitive", description: "Участие в 3 турнирах", details: ["Засчитывается ретроспективно, если достигнуто до 4-го уровня"] },
     ]},
     { level: 5, title: "Элита", competitive: true, stars: [
-      { name: "Не определено", type: "pending", description: "Будет определено позже", details: [] },
       { name: "Мастер-класс", type: "leadership", description: "Подготовить и провести мастер-класс на тему фехтования — собственный анализ, разработка упражнений и преподавание", details: [] },
-      { name: "Не определено", type: "pending", description: "Будет определено позже", details: [] },
+      { name: "Соревновательный стаж", type: "competitive", description: "Стабильное присутствие на турнирах — участие в 5 турнирах", details: ["Засчитывается ретроспективно, если достигнуто до 5-го уровня"] },
+      { name: "Соревновательное достижение", type: "competitive", description: "Подтверждённые результаты на турнирах", details: ["Выход в Advanced на 1 турнире или выход в Basic плей-офф на 3 отдельных турнирах", "Засчитывается ретроспективно, если достигнуто до 5-го уровня"] },
     ]},
   ],
 };
@@ -408,7 +410,7 @@ function renderStarReq(star, levelIdx, starIdx, isEarned, showEarned) {
   const filled = star.type !== "pending";
   const earnedStyle = (showEarned && isEarned) ? `box-shadow:inset 0 0 0 1px rgba(226,179,64,0.3);` : "";
 
-  let html = `<div class="star-req${hasDetails ? " clickable" : ""}" style="background:${c.bg};border:1px solid ${c.border};${earnedStyle}" ${hasDetails ? `onclick="event.stopPropagation();toggleStar('${starKey}')"` : ""}>`;
+  let html = `<div class="star-req${hasDetails ? " clickable" : ""}" style="background:${c.bg};border:1px solid ${c.border};${earnedStyle}" onclick="event.stopPropagation();${hasDetails ? `toggleStar('${starKey}')` : ""}">`;
   html += `<div class="star-top"><div class="star-info">`;
   html += `<div class="star-name-row">${starSVG(12, filled)}<span class="star-name" style="color:${c.text}">${star.name}</span>`;
   if (showEarned && isEarned) html += `<span style="margin-left:auto;flex-shrink:0;">${checkSVG(12)}</span>`;
@@ -627,5 +629,6 @@ function toggleAchievement(athleteIdx, achIdx) {
 
 render();
 </script>
+
 </body>
 </html>
