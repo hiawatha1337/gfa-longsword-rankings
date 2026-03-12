@@ -382,6 +382,14 @@ const typeColors = {
   pending: { bg: "#1e1e1e", border: "#333", text: "#666" },
 };
 
+const levelColors = {
+  1: { accent: "#555",    avatarBg: "linear-gradient(135deg, #2a2a2a, #1e1e1e)", avatarBorder: "#383838", avatarText: "#777" },
+  2: { accent: "#2d5a2d", avatarBg: "linear-gradient(135deg, #1a3a1a, #162e16)", avatarBorder: "#2d5a2d", avatarText: "#7bc47b" },
+  3: { accent: "#2d4a6a", avatarBg: "linear-gradient(135deg, #1a2a3a, #162636)", avatarBorder: "#2d4a6a", avatarText: "#7baed4" },
+  4: { accent: "#4a2d6a", avatarBg: "linear-gradient(135deg, #2a1a3a, #241636)", avatarBorder: "#4a2d6a", avatarText: "#a87bd4" },
+  5: { accent: "#8a6a1a", avatarBg: "linear-gradient(135deg, #3a3010, #2e260e)", avatarBorder: "#8a6a1a", avatarText: "#e2b340" },
+};
+
 let currentLang = "ru";
 let currentTab = "overview";
 let selectedAthlete = null;
@@ -480,14 +488,16 @@ function renderAthleteCard(athlete, idx, t, levels) {
   const achievements = athlete.achievements || [];
   const isRu = currentLang === "ru";
 
-  let html = `<div class="athlete-card${expanded ? " expanded" : ""}" onclick="toggleAthleteCard(${idx})">`;
+  const lc = levelColors[athlete.level] || levelColors[1];
+
+  let html = `<div class="athlete-card${expanded ? " expanded" : ""}" style="border-left:3px solid ${lc.accent};" onclick="toggleAthleteCard(${idx})">`;
 
   // Header row
   html += `<div class="athlete-card-header">`;
   html += `<div class="athlete-avatar">${initial}</div>`;
   html += `<div class="athlete-card-info">`;
   html += `<div class="athlete-card-name">${athlete.name}</div>`;
-  html += `<div class="athlete-card-level">${t.level} ${athlete.level} · ${currentLevelData.title}</div>`;
+  html += `<div class="athlete-card-level" style="color:${lc.avatarText}">${t.level} ${athlete.level} · ${currentLevelData.title}</div>`;
   // Achievement badges inline on collapsed card
   if (achievements.length > 0 && !expanded) {
     html += `<div class="achievements-row" style="margin-top:4px;">`;
